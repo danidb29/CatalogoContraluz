@@ -1,0 +1,45 @@
+/* .App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+label {
+  display: block;
+  padding-left: 15px;
+  text-indent: -15px;
+}
+
+input {
+  width: 130px;
+  height: 13px;
+  padding: 5px;
+  margin: 10px;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  *overflow: hidden;
+}
+
+form {
+  margin-top: 35px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 15px;
+  border: 0px;
+  background-color: rgb(247, 124, 86);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.error {
+  color: red;
+  font-size: 11px;
+}
+.success {
+  font-size: 20px;
+  color: rgb(75, 181, 67);
+} */
