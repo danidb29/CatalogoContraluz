@@ -18,12 +18,12 @@ export const Catalogo = () => {
       </div>
       <div className="productos">
         <Producto
-          image="src/assets/img/cafetera.jpg"
+          image="src/assets/img/cafetera2.jpg"
           name="Cafetera Madera Roja"
           price="50 000"
         />
         <Producto
-          image="src/assets/img/flor.jpg"
+          image="src/assets/img/flor2.jpg"
           name="Cafetera Madera Roja"
           price="50 000"
         />
