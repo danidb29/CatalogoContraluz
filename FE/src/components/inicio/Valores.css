@@ -1,0 +1,66 @@
+.informacion-container{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.titulo-container{
+    width: 100%;
+    margin: 0 auto;
+    background-color: #c41230;
+    text-align: center;
+
+}
+.titulo-container h1{
+    font-family: Arial;
+    font-size: 1.5rem;
+    color: white;
+
+}
+
+.valor-container{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+    margin-top: 50px;;
+}
+
+.valor-container p{
+    font-family: Arial;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 50%;
+}
+
+.valor-container img{
+    width: 35%;
+    min-width: 300px;
+}
+
+.mision{
+    background: #c41230;
+}
+
+.vision{
+    background: #00704A;
+}
+
+.somos{
+    background: #eeb211;
+}
+
+@media (max-width: 685px){
+    .valor-container{
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .valor-container p{
+        width: 100%;
+    }
+
+    .valor-container img{
+        order:10 !important;
+    }
+}

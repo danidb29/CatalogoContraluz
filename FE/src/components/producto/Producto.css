@@ -1,0 +1,67 @@
+.info {
+    background-color: #f5f5f5;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto;
+    min-width: 300px;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.image-container {
+    overflow: hidden;
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
+    height: 330px;
+}
+
+
+
+.carrito {
+    background: #eeb211;
+    width: 36px;
+    border-radius: 50%;
+    align-self: end;
+    margin-bottom: 15px;
+    cursor: pointer;
+    height: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carrito i {
+    font-size: 23px;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.info h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+
+.precio {
+    background: #F4F1EE;
+    border-radius: 29px;
+    width: 220px;
+    height: 30px;
+    margin: auto 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 7px 7px 3px lightgray;
+}

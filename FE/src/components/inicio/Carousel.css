@@ -1,0 +1,41 @@
+.carousel-images {
+  position: relative;
+  border-radius: 10px;
+  max-width: 650px;
+  margin: auto;
+  width: 70%;
+  overflow: hidden;
+  height: 58vw;
+  max-height: 400px;
+}
+.carousel-images img {
+  width: 99%;
+  height: 99%;
+  border-radius: 8px;
+}
+.slide_direction {
+  display: flex;
+  justify-content: space-between;
+}
+.left,.right i{
+  font-size: 30px;
+}
+.left,
+.right {
+  color: black;
+  padding: 10px 3px 7px 13px;
+  margin: 0 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto 10px;
+  height: 25px;
+  width: 25px;
+}
+.left {
+  left: -30px;
+}
+.right {
+  right: -6px
+}
