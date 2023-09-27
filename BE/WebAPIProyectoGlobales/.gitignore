@@ -1,0 +1,32 @@
+# Archivos y carpetas generados por Visual Studio
+.vscode/
+.vs/
+bin/
+obj/
+binaries/
+*.user
+*.suo
+*.cache
+*.log
+*.vspscc
+*.vssscc
+ProjectUserOptions/
+[Tt]est[Rr]esult*/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.sln.iml
+
+# Carpeta de paquetes de NuGet
+packages/
+
+# Carpeta de salida de compilación
+Release/
+Debug/
+
+# Archivos de configuración locales
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+
+# Carpeta de publicación de IIS
+PublishProfiles/
