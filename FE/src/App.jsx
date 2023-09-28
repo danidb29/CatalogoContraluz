@@ -8,12 +8,14 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
+import LoginForm from "./components/login/loginForm";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />}>
         <Route index element={<Inicio />} />
         <Route path="/catalogo" element={<CatalogoCliente />} />
+        <Route path="/administrador" element={<LoginForm/>}/>
       </Route>
     )
   );
