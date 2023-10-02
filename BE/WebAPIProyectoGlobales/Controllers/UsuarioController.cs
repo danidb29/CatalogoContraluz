@@ -117,4 +117,29 @@ public class UsuarioController : ControllerBase
             return StatusCode(500);
         }
     }
+
+    //LOGIN
+    [HttpPost, Route("[action]", Name = "Login")]
+    public ActionResult Login([FromBody] Usuario Usuario)
+    {
+        try
+        {
+            var context = new ProyectoglobalesContext();
+            var usuario = context.Usuarios.FirstOrDefault(x => x.Correo == Usuario.Correo && x.Password == Usuario.Password);
+            if (usuario != null)
+        {
+            return Ok(usuario);
+        }
+        else
+        {
+            return Unauthorized();
+        }
+        }
+        catch  (Exception ex)
+        {    
+            _logger.LogError($"Error al autenticar el usuario: {ex.Message}");
+            return StatusCode(500);
+        }
+        
+    }
 }
