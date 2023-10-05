@@ -5,7 +5,7 @@ export const CatalogoCliente = () => {
   return (
     <>
       <SearchBar />
-      <Catalogo />
+      <Catalogo tipo={'cliente'} />
     </>
   );
 };
