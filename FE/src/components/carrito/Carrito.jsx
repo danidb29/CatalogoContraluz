@@ -14,6 +14,20 @@ export const Carrito = () => {
         return precioC
     }
 
+    const clickWhatsApp = () =>{
+        let texto = serializarCarrito();
+        let url = `https://wa.me/+50661412570/?text=${texto}`;
+        window.open(url, '_blank');
+    }
+
+    const serializarCarrito = () => {
+        let mensaje = "Me gustaría comprar los siguientes productos:\n";
+        carrito.forEach(producto => {
+            mensaje += `${producto.name} - ${producto.cantidad}\n`;
+          });
+        return encodeURIComponent(mensaje);
+    }
+
     const { carrito, setCarrito } = useContext(carritoContext);
 
     const [precio, setPrecio] = useState(calculaPrecio())
@@ -56,8 +70,8 @@ export const Carrito = () => {
                             </div>
 
                             <div class="d-grid">
-                                <button class="btn btn-primary" type="button">
-                                    Comprar Por Whatssap
+                                <button class="btn btn-primary" type="button" onClick={clickWhatsApp}>
+                                    Comprar Por WhatsApp
                                     <i class="fa-brands fa-whatsapp"></i>
                                 </button>
                             </div>
