@@ -1,31 +1,36 @@
 import React from "react";
 import { Producto } from "../producto/Producto";
 import "./Catalogo.css";
-export const Catalogo = () => {
+export const Catalogo = ({ tipo }) => {
+
   return (
     <div className="catalogo">
       <div className="productos">
-        <Producto
+        <Producto tipo={tipo}
           image="src/assets/img/cafetera.jpg"
           name="Cafetera Madera Roja"
-          price="50 000"
+          price="50000"
+          id='1'
         />
-        <Producto
+        <Producto tipo={tipo}
           image="src/assets/img/flor.jpg"
           name="Cafetera Madera Roja"
-          price="50 000"
+          price="30000"
+          id='2'
         />
       </div>
       <div className="productos">
-        <Producto
+        <Producto tipo={tipo}
           image="src/assets/img/cafetera2.jpg"
           name="Cafetera Madera Roja"
-          price="50 000"
+          price="50000"
+          id='3'
         />
-        <Producto
+        <Producto tipo={tipo}
           image="src/assets/img/flor2.jpg"
           name="Cafetera Madera Roja"
-          price="50 000"
+          price="50000"
+          id='4'
         />
       </div>
     </div>
