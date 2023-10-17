@@ -7,8 +7,10 @@ export const NavBar = ({ isAuthenticated }) => {
     <header>
       <div className="container-nav">
         <div className="container-logotipo">
+        <Link className="flex flex-row" to="/">
           <img className="img-logo" src="src/assets/img/logo.png" />
           <img className="img-nombre" src="src/assets/img/titulo.png" />
+        </Link>
         </div>
         <nav>
           <ul>
