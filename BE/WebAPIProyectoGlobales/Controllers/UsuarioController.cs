@@ -128,7 +128,7 @@ public class UsuarioController : ControllerBase
             var usuario = context.Usuarios.FirstOrDefault(x => x.Correo == Usuario.Correo && x.Password == Usuario.Password);
             if (usuario != null)
         {
-            return Ok(usuario);
+            return Ok(usuario.Correo);
         }
         else
         {

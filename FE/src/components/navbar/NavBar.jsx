@@ -1,7 +1,8 @@
 import "./NavBar.css";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export const NavBar = () => {
+export const NavBar = ({ isAuthenticated }) => {
   return (
     <header>
       <div className="container-nav">
@@ -35,6 +36,14 @@ export const NavBar = () => {
               </Link>
               <i className="ri-admin-line"></i>
             </li>
+            {isAuthenticated && (
+              <li>
+                <Link className="links" to="/" onClick={ localStorage.removeItem('usuario') }>
+                  Cerrar Sesión
+                </Link>
+                <i className="ri-user-line hover:text-red-500"></i>
+              </li>
+            )}
           </ul>
         </nav>
         <div className="bx bx-menu" id="menu-icon">
@@ -43,4 +52,8 @@ export const NavBar = () => {
       </div>
     </header>
   );
+};
+
+NavBar.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
 };

@@ -10,12 +10,14 @@ import {
 } from "react-router-dom";
 import LoginForm from "./components/login/loginForm";
 function App() {
+  let isAuthenticated = localStorage.getItem('usuario') ? true : false;
+  console.log('isAuthenticated: ', isAuthenticated);
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Root />}>
+      <Route path="/" element={<Root isAuthenticated={isAuthenticated}/>}>
         <Route index element={<Inicio />} />
         <Route path="/catalogo" element={<CatalogoCliente />} />
-        <Route path="/administrador" element={<LoginForm/>}/>
+        <Route path="/administrador" element={ isAuthenticated? <CatalogoCliente/> : <LoginForm/>}/>
       </Route>
     )
   );
@@ -26,10 +28,10 @@ function App() {
   );
 }
 
-const Root = () => {
+const Root = (isAuthenticated) => {
   return (
     <>
-      <NavBar></NavBar>
+      <NavBar isAuthenticated={isAuthenticated}></NavBar>
       <div>
         <Outlet />
       </div>
