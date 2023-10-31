@@ -1,9 +1,9 @@
 import ProductInputs from "./ProductInputs";
 import UploadImage from "./uploadImage";
 
-const ProductForm = () => {
+export const ProductForm = () => {
   return (
-    <div className="container mx-auto border-2 border-indigo-500/100 rounded-lg ">
+    <div className="container mx-auto my-8 border-2 rounded-lg ">
       <div className="m-6 pe-8 grid md:grid-flow-col md:gap-x-10 grid-flow-row gap-y-16">
         <ProductInputs />
         <UploadImage />
@@ -26,5 +26,3 @@ const ProductForm = () => {
 
   );
 }
-
-export default ProductForm;

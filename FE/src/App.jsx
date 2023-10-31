@@ -2,7 +2,8 @@ import { NavBar } from "./components/navbar/NavBar";
 import { Inicio } from "./components/inicio/Inicio";
 import { CatalogoCliente } from "./components/catalogoCliente/CatalogoCliente";
 import { CatalogoAdmin } from "./components/catalogoAdmin/CatalogoAdmin";
-import { Carrito } from "./components/carrito/Carrito"
+import { Carrito } from "./components/carrito/Carrito";
+import { ProductForm } from "./components/product/productForm";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -42,6 +43,7 @@ function App() {
         } />
         <Route path='/catalogoAdmin' element={<CatalogoAdmin />} />
         <Route path="/catalogo" element={<CatalogoCliente />} />
+        <Route path="/agregarProducto" element={<ProductForm />} />
         {/* <Route path="/administrador" element={ isAuthenticated? <CatalogoCliente/> : <LoginForm/>}/> */}
       </Route>
     )
