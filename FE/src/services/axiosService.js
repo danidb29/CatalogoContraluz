@@ -10,3 +10,7 @@ export function login(values) {
   }
   return APIRequest.post('/usuario/login', data);
 }
+
+export function getProductos() {
+  return APIRequest.get('/Producto');
+}

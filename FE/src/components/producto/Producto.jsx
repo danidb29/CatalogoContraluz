@@ -63,7 +63,7 @@ export const Producto = ({ id, image, name, price, tipo }) => {
   return (
     <>
       <div className="info">
-        <div clasName="carrito"></div>
+        <div className="carrito"></div>
         <div className="image-container">
           {tipo === 'cliente' &&
             <div className="carrito">

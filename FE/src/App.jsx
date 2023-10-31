@@ -12,27 +12,37 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import LoginForm from "./components/login/loginForm";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getProductos } from "./services/axiosService";
 
 export const carritoContext = React.createContext({
   carrito: [],
   setCarrito: () => { }
 });
 
-
 function App() {
+  const [productos, setProductos] = useState([]);
+  useEffect(() => {
+    cargarProductos();
+  }, []);
+  
+  async function cargarProductos() { 
+    const response = await getProductos(); 
+    setProductos(response.data);
+  }
+
   let isAuthenticated = localStorage.getItem('usuario') ? true : false;
   console.log('isAuthenticated: ', isAuthenticated);
   const [carrito, setCarrito] = useState([]);
   const valueCarrito = { carrito, setCarrito }
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Root isAuthenticated={isAuthenticated}/>}>
+      <Route path="/" element={<Root isAuthenticated={isAuthenticated} />}>
         <Route index element={<Inicio />} />
         <Route path="/administrador" element={<LoginForm />} />
         <Route path="/catalogo" element={
           <carritoContext.Provider value={valueCarrito}>
-            <CatalogoCliente />
+            <CatalogoCliente productos= {productos} />
           </carritoContext.Provider>
 
         } />
@@ -41,8 +51,8 @@ function App() {
             <Carrito />
           </carritoContext.Provider>
         } />
-        <Route path='/catalogoAdmin' element={<CatalogoAdmin />} />
-        <Route path="/catalogo" element={<CatalogoCliente />} />
+        <Route path='/catalogoAdmin' element={<CatalogoAdmin productos= {productos} />} />
+        <Route path="/catalogo" element={<CatalogoCliente productos= {productos} />} />
         <Route path="/agregarProducto" element={<ProductForm />} />
         {/* <Route path="/administrador" element={ isAuthenticated? <CatalogoCliente/> : <LoginForm/>}/> */}
       </Route>

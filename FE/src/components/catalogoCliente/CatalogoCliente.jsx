@@ -1,11 +1,11 @@
 import { SearchBar } from "../searchBar/SearchBar";
 import { Catalogo } from "../catalogo/Catalogo";
 
-export const CatalogoCliente = () => {
+export const CatalogoCliente = ({productos}) => {
   return (
     <>
       <SearchBar />
-      <Catalogo tipo={'cliente'} />
+      <Catalogo tipo={'cliente'} productos = { productos } />
     </>
   );
 };
