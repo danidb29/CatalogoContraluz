@@ -15,6 +15,7 @@ import LoginForm from "./components/login/loginForm";
 import React, { useEffect, useState } from "react";
 import { getProductos } from "./services/axiosService";
 
+
 export const carritoContext = React.createContext({
   carrito: [],
   setCarrito: () => { }
@@ -25,9 +26,9 @@ function App() {
   useEffect(() => {
     cargarProductos();
   }, []);
-  
-  async function cargarProductos() { 
-    const response = await getProductos(); 
+
+  async function cargarProductos() {
+    const response = await getProductos();
     setProductos(response.data);
   }
 
@@ -42,7 +43,7 @@ function App() {
         <Route path="/administrador" element={<LoginForm />} />
         <Route path="/catalogo" element={
           <carritoContext.Provider value={valueCarrito}>
-            <CatalogoCliente productos= {productos} />
+            <CatalogoCliente productos={productos} />
           </carritoContext.Provider>
 
         } />
@@ -51,8 +52,8 @@ function App() {
             <Carrito />
           </carritoContext.Provider>
         } />
-        <Route path='/catalogoAdmin' element={<CatalogoAdmin productos= {productos} />} />
-        <Route path="/catalogo" element={<CatalogoCliente productos= {productos} />} />
+        <Route path='/catalogoAdmin' element={<CatalogoAdmin productos={productos} />} />
+        <Route path="/catalogo" element={<CatalogoCliente productos={productos} />} />
         <Route path="/agregarProducto" element={<ProductForm />} />
         {/* <Route path="/administrador" element={ isAuthenticated? <CatalogoCliente/> : <LoginForm/>}/> */}
       </Route>
