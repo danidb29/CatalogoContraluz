@@ -75,6 +75,60 @@ public class ProductoController : ControllerBase
         }
     }
 
+    [HttpPost("InsertarProducto")]
+    public IActionResult CreateProductoEtiqueta([FromBody] ProductoInsercion productoInsercion)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var context = new ProyectoglobalesContext();
+
+            Producto producto = new Producto();
+            producto.Descripcion = productoInsercion.Nombre;
+            producto.Codigo = productoInsercion.Codigo;
+            producto.Precio = productoInsercion.Precio;
+
+            context.Productos.Add(producto);
+            context.SaveChanges();
+
+            int idGenerado = producto.IdProducto;
+
+            //Revisar las etiquetas e insertarlas en la tabla de Etiquetas si no existen para luego insertarlas como ProductoEtiqueta
+            foreach (var etiqueta in productoInsercion.Etiquetas)
+            {
+                var etiquetaExistente = context.Etiqueta.FirstOrDefault(x => x.Nombre == etiqueta);
+                if (etiquetaExistente == null)
+                {
+                    Etiqueta etiquetaNueva = new Etiqueta();
+                    etiquetaNueva.Nombre = etiqueta;
+                    context.Etiqueta.Add(etiquetaNueva);
+                    context.SaveChanges();
+                }
+            }
+
+            //Insertar las etiquetas en la tabla de ProductoEtiqueta
+            foreach (var etiqueta in productoInsercion.Etiquetas)
+            {
+                var etiquetaExistente = context.Etiqueta.FirstOrDefault(x => x.Nombre == etiqueta);
+                ProductoEtiqueta productoEtiqueta = new ProductoEtiqueta();
+                productoEtiqueta.IdEtiqueta = etiquetaExistente.IdEtiqueta;
+                productoEtiqueta.IdProducto = idGenerado;
+                context.ProductoEtiqueta.Add(productoEtiqueta);
+                context.SaveChanges();
+            }
+            return Ok(new {Id = idGenerado});
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error al crear el producto: {ex.Message}");
+            return StatusCode(500);
+        }
+    }
+
     [HttpPut("{id}")]
     public IActionResult Update(int id, [FromBody] Producto producto)
     {
@@ -113,6 +167,16 @@ public class ProductoController : ControllerBase
         try
         {
             var context = new ProyectoglobalesContext();
+
+            //Eliminar ProductoEtiquetas antes
+            var productoEtiquetas = context.ProductoEtiqueta.Where(x => x.IdProducto == id);
+            foreach (var productoEtiqueta in productoEtiquetas)
+            {
+                context.ProductoEtiqueta.Remove(productoEtiqueta);
+            }
+            context.SaveChanges();
+
+            //Eliminar Producto
             var producto = context.Productos.FirstOrDefault(x => x.IdProducto == id);
             if (producto == null)
             {

@@ -127,13 +127,13 @@ public class UsuarioController : ControllerBase
             var context = new ProyectoglobalesContext();
             var usuario = context.Usuarios.FirstOrDefault(x => x.Correo == Usuario.Correo && x.Password == Usuario.Password);
             if (usuario != null)
-        {
-            return Ok(usuario);
-        }
-        else
-        {
-            return Unauthorized();
-        }
+            {
+                return Ok(usuario);
+            }
+            else
+            {
+                return Unauthorized();
+            }
         }
         catch  (Exception ex)
         {    
