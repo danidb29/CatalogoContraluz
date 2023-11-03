@@ -1,0 +1,32 @@
+.agregarP {
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    flex-direction: column;
+}
+
+.agregarP button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    cursor: pointer;
+    align-self: center;
+    height: 54px;
+}
+
+.agregarP label {
+    align-self: center;
+}
+
+.agregarP i {
+    font-size: 45px;
+    color: #c41230;
+}
+
+.agregarP div {
+    display: flex;
+    flex-direction: column;
+    align-self: end;
+}

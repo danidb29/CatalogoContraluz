@@ -128,13 +128,13 @@ public class UsuarioController : ControllerBase
             var usuario = context.Usuarios.FirstOrDefault(x => x.Correo == Usuario.Correo && x.Password == Usuario.Password);
             if (usuario != null)
             {
-                return Ok(usuario);
+                return Ok(usuario.Correo);
             }
             else
             {
                 return Unauthorized();
             }
-        }
+            }
         catch  (Exception ex)
         {    
             _logger.LogError($"Error al autenticar el usuario: {ex.Message}");

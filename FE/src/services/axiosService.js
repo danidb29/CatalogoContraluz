@@ -5,8 +5,12 @@ import APIRequest from "../config/axios.config";
 //* example
 export function login(values) {
   const data = {
-      "user": values.username.toString().trim(),
+      "correo": values.correo.toString().trim(),
       "password": values.password.toString().trim()
   }
   return APIRequest.post('/usuario/login', data);
+}
+
+export function getProductos() {
+  return APIRequest.get('/Producto');
 }
