@@ -14,3 +14,7 @@ export function login(values) {
 export function getProductos() {
   return APIRequest.get('/Producto');
 }
+
+export function insertarProducto(producto) {
+  return APIRequest.post('/Producto', producto);
+}
