@@ -1,16 +1,22 @@
+import { useEffect, useState } from "react";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
-export const NavBar = ({ isAuthenticated }) => {
+export const NavBar = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem('usuario') ? true : false)
+    console.log('isLoggedInInNavBar: ', isLoggedIn)
+  }, [isLoggedIn]);
   return (
     <header>
       <div className="container-nav">
         <div className="container-logotipo">
-        <Link className="flex flex-row" to="/">
-          <img className="img-logo" src="src/assets/img/logo.png" />
-          <img className="img-nombre" src="src/assets/img/titulo.png" />
-        </Link>
+          <Link className="flex flex-row" to="/">
+            <img className="img-logo" src="src/assets/img/logo.png" />
+            <img className="img-nombre" src="src/assets/img/titulo.png" />
+          </Link>
         </div>
         <nav>
           <ul>
@@ -33,19 +39,19 @@ export const NavBar = ({ isAuthenticated }) => {
               <i className="ri-shopping-cart-line"></i>
             </li>
             <li>
-              <Link className="links" to="/administrador">
+              <Link className="links" to={'/admin/catalogo'}>
                 Administrador
               </Link>
               <i className="ri-admin-line"></i>
             </li>
-            {isAuthenticated && (
+            {!isLoggedIn ||
               <li>
-                <Link className="links" to="/" onClick={ localStorage.removeItem('usuario') }>
+                <Link className="links" to="/" onClick={() => localStorage.removeItem('usuario')()}>
                   Cerrar Sesión
                 </Link>
                 <i className="ri-user-line hover:text-red-500"></i>
               </li>
-            )}
+            }
           </ul>
         </nav>
         <div className="bx bx-menu" id="menu-icon">
@@ -54,8 +60,4 @@ export const NavBar = ({ isAuthenticated }) => {
       </div>
     </header>
   );
-};
-
-NavBar.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
 };
