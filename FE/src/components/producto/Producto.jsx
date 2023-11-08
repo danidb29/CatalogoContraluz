@@ -5,7 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { carritoContext } from "../../App";
 import { useContext } from "react";
 
-export const Producto = ({ id, image, name, price, tipo }) => {
+
+export const Producto = ({ id, image, name, price, tipo, etiquetas }) => {
   const { carrito, setCarrito } = useContext(carritoContext);
 
   const estaEnCarrito = () => {
@@ -23,7 +24,8 @@ export const Producto = ({ id, image, name, price, tipo }) => {
     image: image,
     name: name,
     price: price,
-    cantidad: 1
+    cantidad: 1,
+    etiquetas: etiquetas
   }
 
   const [cantidad, setCantidad] = useState(estaEnCarrito());
@@ -78,14 +80,24 @@ export const Producto = ({ id, image, name, price, tipo }) => {
         </div>
         <div>
           <h2>{name}</h2>
-          {tipo === 'cliente' ?
-            <div className="precio">
-              <h2>₡{price}</h2>
-            </div> :
-            <div className="precio" style={{ backgroundColor: "#eeb211" }}>
-              <button>Editar</button>
-            </div>}
+          <div className="flex flex-row justify-center">
+            {
+              etiquetas.map(etiqueta => {
+                console.log(etiqueta);
 
+                return <p className="mx-2">{etiqueta.toLowerCase()}</p>
+              })
+            }
+          </div>
+          {
+            tipo === 'cliente' ?
+              <div className="precio">
+                <h2>₡{price}</h2>
+              </div> :
+              <div className="precio" style={{ backgroundColor: "#eeb211" }}>
+                <button>Editar</button>
+              </div>
+          }
         </div>
       </div>
       <ToastContainer />

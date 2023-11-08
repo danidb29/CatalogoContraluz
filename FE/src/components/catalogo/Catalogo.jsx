@@ -28,6 +28,7 @@ export const Catalogo = ({ tipo, productos }) => {
               name={producto.descripcion.toString()}
               price={producto.precio.toString()}
               id={producto.idProducto.toString()}
+              etiquetas={producto.etiquetas}
             />
           ))}
         </div>
