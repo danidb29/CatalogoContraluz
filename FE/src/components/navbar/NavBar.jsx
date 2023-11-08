@@ -44,14 +44,17 @@ export const NavBar = () => {
               </Link>
               <i className="ri-admin-line"></i>
             </li>
-            {isLoggedIn &&
+            {/* {isLoggedIn && */}
               <li>
                 <Link className="links" to="/" onClick={() => localStorage.removeItem('usuario')()}>
                   Cerrar Sesión
                 </Link>
                 <i className="ri-user-line hover:text-red-500"></i>
               </li>
-            }
+            {/* }
+              Se tiene que volver a renderizar el navbar para mostrar el botón de cerrar sesión
+              pero no se está renderizando de nuevo, por ahora se mantiene el cerrar sesion fijo
+             */}
           </ul>
         </nav>
         <div className="bx bx-menu" id="menu-icon">

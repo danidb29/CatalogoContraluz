@@ -83,8 +83,6 @@ export const Producto = ({ id, image, name, price, tipo, etiquetas }) => {
           <div className="flex flex-row justify-center">
             {
               etiquetas.map(etiqueta => {
-                console.log(etiqueta);
-
                 return <p className="mx-2">{etiqueta.toLowerCase()}</p>
               })
             }

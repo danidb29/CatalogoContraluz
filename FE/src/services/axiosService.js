@@ -16,5 +16,5 @@ export function getProductos() {
 }
 
 export function insertarProducto(producto) {
-  return APIRequest.post('/Producto', producto);
+  return APIRequest.post('/Producto/InsertarProducto', producto);
 }

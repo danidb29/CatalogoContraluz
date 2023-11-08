@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 
-
 //? https://codesandbox.io/s/beautiful-kirch-rupk8y?file=/src/App.js:1544-1601
 //TODO: check validation, can be only with css or with events
-//TODO: connect with endpoint
-const ProductInputs = () => {
+const ProductInputs = ({ onSubmitData }) => {
   const [inputFields, setInputFields] = useState({
     nombre: "",
-    etiquetas: [],
+    etiquetas: "",
     precio: 0,
   });
   const [errors, setErrors] = useState({});
@@ -30,10 +28,14 @@ const ProductInputs = () => {
     setInputFields({ ...inputFields, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     setErrors(validateValues(inputFields));
     setSubmitting(true);
+    console.log('inbutFields: ', inputFields)
+    console.log('etiquetas: ', inputFields.etiquetas)
+    const etiquetas = inputFields.etiquetas.length ? inputFields.etiquetas.split(',') : [];
+    console.log('etiquetas: ', etiquetas)
+    onSubmitData(inputFields);
   };
 
   const finishSubmit = () => {
@@ -44,13 +46,14 @@ const ProductInputs = () => {
     if (Object.keys(errors).length === 0 && submitting) {
       finishSubmit();
     }
-  }, [errors]);
+    handleSubmit();
+  }, [inputFields]);
 
 
   return (
     <div>
       {Object.keys(errors).length === 0 && submitting ? (
-        <span className="success">Successfully submitted ✓</span>
+        <span className="success"></span>
       ) : null}
       <form>
         <div className="p-3 grid grid-flow-row gap-y-12 sm:grid-rows-3">
@@ -68,12 +71,13 @@ const ProductInputs = () => {
                   onChange={handleChange}
                   className="block flex-1 border-0 bg-transparent text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
                   placeholder="Nombre del producto"
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  pattern="[A-Za-z]+$"
                 />
-                {errors.nombre ? (
-                  <p className="text-red">Email should be at least 15 characters long</p>
-                ) : null}
+                
               </div>
+              {errors.nombre ? (
+                  <p className="text-red"></p>
+                ) : null}
             </div>
           </div>
           <div className="sm:row-span-2 flex items-center">
@@ -83,7 +87,7 @@ const ProductInputs = () => {
             <div className="flex-1">
               <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-slate-50 sm:max-w-md">
                 <input
-                  type="text"
+                  type="number"
                   name="precio"
                   id="precio"
                   value={inputFields.precio}

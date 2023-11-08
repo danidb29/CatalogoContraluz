@@ -18,7 +18,7 @@ export const CatalogoAdmin = ({productos}) => {
             <div className="agregarP">
                 <div>
                     <button>
-                        <i class="ri-add-circle-fill"></i>
+                        <i class="ri-add-circle-fill" onClick={() => navigate('/agregarProducto')}></i>
                     </button>
                     <label>Agregar Producto</label>
                 </div>
