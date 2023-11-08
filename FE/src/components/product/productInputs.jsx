@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const ProductInputs = () => {
   const [inputFields, setInputFields] = useState({
     nombre: "",
-    etiquetas: "",
+    etiquetas: [],
     precio: 0,
   });
   const [errors, setErrors] = useState({});
