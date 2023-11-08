@@ -134,7 +134,7 @@ public class UsuarioController : ControllerBase
             {
                 return Unauthorized();
             }
-            }
+        }
         catch  (Exception ex)
         {    
             _logger.LogError($"Error al autenticar el usuario: {ex.Message}");

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebAPIProyectoGlobales.Models;
 
 namespace WebAPIProyectoGlobales.Controllers;
@@ -21,8 +22,22 @@ public class ProductoController : ControllerBase
         try
         {
             var context = new ProyectoglobalesContext();
-            var productos = context.Productos.ToList();
-            return Ok(productos);
+            var productos = context.Productos
+                .Include(p => p.ProductoEtiqueta)
+                    .ThenInclude(pe => pe.IdEtiquetaNavigation)
+                .ToList();
+
+            // Crear una proyección de productos que incluye solo los nombres de las etiquetas
+            var productosConEtiquetas = productos.Select(producto => new
+            {
+                IdProducto = producto.IdProducto,
+                Descripcion = producto.Descripcion,
+                Codigo = producto.Codigo,
+                Precio = producto.Precio,
+                Etiquetas = producto.ProductoEtiqueta.Select(pe => pe.IdEtiquetaNavigation.Nombre).ToList()
+            }).ToList();
+
+            return Ok(productosConEtiquetas);
         }
         catch (Exception ex)
         {
@@ -39,12 +54,26 @@ public class ProductoController : ControllerBase
         try
         {
             var context = new ProyectoglobalesContext();
-            var producto = context.Productos.FirstOrDefault(x => x.IdProducto == idProducto);
+            var producto = context.Productos
+                .Include(p => p.ProductoEtiqueta)
+                    .ThenInclude(pe => pe.IdEtiquetaNavigation)
+                .FirstOrDefault(x => x.IdProducto == idProducto);
+                
             if (producto == null)
             {
                 return NotFound($"No existen productos con el ID: {idProducto}:");
             }
-            return Ok(producto);
+
+            var productoConEtiquetas = new
+            {
+                IdProducto = producto.IdProducto,
+                Descripcion = producto.Descripcion,
+                Codigo = producto.Codigo,
+                Precio = producto.Precio,
+                Etiquetas = producto.ProductoEtiqueta.Select(pe => pe.IdEtiquetaNavigation.Nombre).ToList()
+            };
+
+            return Ok(productoConEtiquetas);
         }
         catch (Exception ex)
         {
@@ -191,5 +220,37 @@ public class ProductoController : ControllerBase
             _logger.LogError($"Error al eliminar los datos del producto con id: {id}");
             return StatusCode(500);
         }
+    }
+
+    [HttpPost("BuscarProductos")]
+    public IActionResult BuscarProductos([FromBody] Busqueda busqueda)
+    {
+        //Busqueda en productos y etiquetas de acuerdo con las palabras clave
+        try
+        {
+            var context = new ProyectoglobalesContext();
+
+            var productosEnDescripcion = context.Productos
+                .ToList() // Trae todos los productos a la memoria
+                .Where(p => busqueda.palabrasClave.Any(keyword => p.Descripcion.ToLower().Contains(keyword.ToLower())))
+                .ToList();
+
+            var productosEnEtiquetas = context.Productos
+                .Where(p => p.ProductoEtiqueta
+                    .Any(pe => busqueda.palabrasClave.Contains(pe.IdEtiquetaNavigation.Nombre.ToLower())))
+                .ToList();
+
+            var resultados = productosEnDescripcion.Union(productosEnEtiquetas).Distinct().ToList();
+
+
+            return Ok(resultados);
+            
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"Error al buscar productos: {ex.Message}");
+            return StatusCode(500);
+        }
+
     }
 }
