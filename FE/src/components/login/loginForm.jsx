@@ -17,11 +17,11 @@ const LoginForm = () => {
       setInputFields(inputFields);
       console.log(inputFields);
       const response = await login(inputFields);
-      console.log('response: ', response);
       if (response.status === 200) {
         // agregar una mejor autenticacion
         localStorage.setItem('usuario', response.data);
-        navigate('/administrador');
+        console.log('ingresado')
+        navigate('/admin/catalogo');
       }
     } catch (error) {
       //! handle error on BE

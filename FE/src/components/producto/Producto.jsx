@@ -69,7 +69,7 @@ export const Producto = ({ id, image, name, price, tipo, etiquetas }) => {
           {tipo === 'cliente' &&
             <div className="carrito">
               {cantidad == 0 ? <i className="ri-shopping-cart-line" onClick={addCarrito}></i> :
-                <i class="ri-delete-bin-line" onClick={subsCarrito}></i>}
+                <i className="ri-delete-bin-line" onClick={subsCarrito}></i>}
             </div>}
           {/* <div className="contador">
           <i class="ri-add-fill"></i>
